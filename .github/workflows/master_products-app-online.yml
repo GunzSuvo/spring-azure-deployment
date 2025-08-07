@@ -27,6 +27,12 @@ jobs:
       - name: Build with Maven
         run: mvn clean install
         working-directory: ./spring-data-jpa-project
+
+      - name: Print test reports
+        run: | 
+           echo "Test Results:"
+               cat ./spring-data-jpa-project/target/surefire-reports/*.txt || true
+           if: failure()
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
@@ -62,3 +68,4 @@ jobs:
           package: '*.jar'
 
           
+
